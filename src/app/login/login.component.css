@@ -1,0 +1,11 @@
+div.loginStyle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 28%;
+}
+
+.icon{
+    width: 35px;
+}
