@@ -1,29 +1,62 @@
-
 <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-     <mat-icon>menu</mat-icon>
-   </button>
-   <span>User</span>
-   <span class="example-spacer"></span>
-   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-     <mat-icon>settings</mat-icon>
-   </button>
-  
- </mat-toolbar>
- <!---->
+    <button mat-icon-button (click)="drawer.toggle()" class="example-icon"
+        aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{this.usernameOutput}}</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>logout</mat-icon>
+    </button>
+
+</mat-toolbar>
+<!---->
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-        <p>Auto-resizing sidenav</p>
-        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-        <button (click)="showFiller = !showFiller" mat-raised-button>
-            Toggle extra text
-        </button>
+        <mat-list>
+            <mat-list-item #listProduct
+                (click)="drawer.toggle(); productOutput = true; offerOutput = false; demandOutput = false">
+                <mat-icon id="micon" mat-list-icon>shopping_cart</mat-icon>
+                <h4>Produits</h4>
+            </mat-list-item>
+            <mat-list-item #listOffer
+                (click)="drawer.toggle(); productOutput = false; offerOutput = true; demandOutput = false">
+                <mat-icon id="micon" mat-list-icon>note</mat-icon>
+                <h4>Bande d'achat</h4>
+            </mat-list-item>
+            <mat-list-item #listDemand
+                (click)="drawer.toggle(); productOutput = false; offerOutput = false; demandOutput = true">
+                <mat-icon id="micon" mat-list-icon>next_week</mat-icon>
+                <h4>Demandes</h4>
+            </mat-list-item>
+        </mat-list>
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <button type="button" mat-button (click)="drawer.toggle()">
-            Toggle sidenav
-        </button>
+        <div class="container" *ngIf="productOutput">
+            <div class="row">
+                <div class="col">
+                    <app-card-product></app-card-product>
+                </div>
+                <div class="col">
+                    <app-card-product></app-card-product>
+                </div>
+                <div class="col">
+                    <app-card-product></app-card-product>
+                </div>
+
+            </div>
+        </div>
+        <div class="container" *ngIf="offerOutput">
+            <div class="row">
+                <div class="col">Bande d'achat</div>
+            </div>
+        </div>
+        <div class="container" *ngIf="demandOutput">
+            <div class="row">
+                <div class="col">Demande</div>
+            </div>
+        </div>
     </div>
 
 </mat-drawer-container>

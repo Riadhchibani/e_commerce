@@ -14,12 +14,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { CardProductComponent } from './home-page/card-product/card-product.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomePageComponent
+    HomePageComponent,
+    CardProductComponent
   ],
   imports: [
     BrowserModule,
@@ -31,10 +36,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSidenavModule,
     MatToolbarModule,
     BrowserAnimationsModule,
+    MatListModule,
+    MatGridListModule,
+    MatPaginatorModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-      { path: 'home', component: HomePageComponent }
+      { path: 'home/:role/:username', component: HomePageComponent }
     ])
   ],
   providers: [],
