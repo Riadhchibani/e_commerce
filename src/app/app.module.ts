@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -18,13 +20,17 @@ import { MatListModule } from '@angular/material/list';
 import { CardProductComponent } from './home-page/card-product/card-product.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DemandComponent } from './home-page/demand/demand.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomePageComponent,
-    CardProductComponent
+    CardProductComponent,
+    DemandComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +45,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatListModule,
     MatGridListModule,
     MatPaginatorModule,
+    MatExpansionModule,
+    ScrollingModule,
+    NgxPaginationModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-      { path: 'home/:role/:username', component: HomePageComponent }
+      { path: 'home/:username', component: HomePageComponent }
     ])
   ],
   providers: [],

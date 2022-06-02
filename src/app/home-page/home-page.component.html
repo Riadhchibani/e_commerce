@@ -33,28 +33,33 @@
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <div class="container" *ngIf="productOutput">
-            <div class="row">
-                <div class="col">
-                    <app-card-product></app-card-product>
+        <div class="bloc">
+            <div class="container" *ngIf="productOutput">
+                <div class=" row">
+                    <div class="col-4" *ngFor="let d of data | paginate:{ itemsPerPage: 6, currentPage: p }">
+                        <app-card-product title="{{ d.title }}"></app-card-product>
+                    </div>
                 </div>
-                <div class="col">
-                    <app-card-product></app-card-product>
-                </div>
-                <div class="col">
-                    <app-card-product></app-card-product>
-                </div>
-
+                <br>
+                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
             </div>
-        </div>
-        <div class="container" *ngIf="offerOutput">
-            <div class="row">
-                <div class="col">Bande d'achat</div>
+            <div class="container" *ngIf="offerOutput">
+                <div class=" row">
+                    <div class="col-4" *ngFor="let d of data | paginate:{ itemsPerPage: 6, currentPage: p }">
+                        <app-card-product title="{{ d.title }}"></app-card-product>
+                    </div>
+                </div>
+                <br>
+                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
             </div>
-        </div>
-        <div class="container" *ngIf="demandOutput">
-            <div class="row">
-                <div class="col">Demande</div>
+            <div class="container" *ngIf="demandOutput">
+                <div class="row">
+                    <div class="col-4" *ngFor="let d of data | paginate:{ itemsPerPage: 6, currentPage: p }">
+                        <app-demand></app-demand>
+                    </div>
+                </div>
+                <br>
+                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
             </div>
         </div>
     </div>
