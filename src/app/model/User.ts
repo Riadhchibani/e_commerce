@@ -1,4 +1,3 @@
-import { Role } from './Role';
 
 export class User {
     constructor(
@@ -12,7 +11,6 @@ export class User {
         public username?: string,
         public password?: string,
         public code?: string,
-        public role?: Role,
         public etat?: boolean
     ) { }
 

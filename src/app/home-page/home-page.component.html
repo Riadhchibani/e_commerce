@@ -8,7 +8,6 @@
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         <mat-icon>logout</mat-icon>
     </button>
-
 </mat-toolbar>
 <!---->
 <mat-drawer-container class="example-container" autosize>
@@ -36,7 +35,7 @@
         <div class="bloc">
             <div class="container" *ngIf="productOutput">
                 <div class=" row">
-                    <div class="col-4" *ngFor="let d of data | paginate:{ itemsPerPage: 6, currentPage: p }">
+                    <div class="col" *ngFor="let d of data | paginate:{ itemsPerPage: 8, currentPage: p }">
                         <app-card-product title="{{ d.title }}"></app-card-product>
                     </div>
                 </div>
@@ -45,8 +44,8 @@
             </div>
             <div class="container" *ngIf="offerOutput">
                 <div class=" row">
-                    <div class="col-4" *ngFor="let d of data | paginate:{ itemsPerPage: 6, currentPage: p }">
-                        <app-card-product title="{{ d.title }}"></app-card-product>
+                    <div class="col" *ngFor="let d of data | paginate:{ itemsPerPage: 8, currentPage: p }">
+                        <app-card-product title="bande d'achat : {{ d.title }}"></app-card-product>
                     </div>
                 </div>
                 <br>
@@ -54,7 +53,7 @@
             </div>
             <div class="container" *ngIf="demandOutput">
                 <div class="row">
-                    <div class="col-4" *ngFor="let d of data | paginate:{ itemsPerPage: 6, currentPage: p }">
+                    <div class="col" *ngFor="let d of data | paginate:{ itemsPerPage: 8, currentPage: p }">
                         <app-demand></app-demand>
                     </div>
                 </div>
