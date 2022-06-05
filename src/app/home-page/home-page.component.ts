@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../user.service';
-import { CardProductComponent } from './card-product/card-product.component';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-home-page',
@@ -18,7 +17,7 @@ export class HomePageComponent implements OnInit {
 
   showFiller = true;
   
-  constructor(private routerService: ActivatedRoute, private user: UserService) { }
+  constructor(private routerService: ActivatedRoute, private productService: ProductService) { }
 
   nextPage() {
     console.log("nextPage");
@@ -27,10 +26,10 @@ export class HomePageComponent implements OnInit {
   p: any;
   data: any = [];
   getData() {
-    this.user.getData().subscribe(
+    this.productService.findAllPoduct().subscribe(
       (data) => {
+        console.log(data)
         this.data = data;
-        console.log(this.data)
       }
     );
   }

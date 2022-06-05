@@ -16,17 +16,17 @@
             <mat-list-item #listProduct
                 (click)="drawer.toggle(); productOutput = true; offerOutput = false; demandOutput = false">
                 <mat-icon id="micon" mat-list-icon>shopping_cart</mat-icon>
-                <h4>Produits</h4>
+                <h4>Liste des produits</h4>
             </mat-list-item>
             <mat-list-item #listOffer
                 (click)="drawer.toggle(); productOutput = false; offerOutput = true; demandOutput = false">
                 <mat-icon id="micon" mat-list-icon>note</mat-icon>
-                <h4>Bande d'achat</h4>
+                <h4>Demande d'achat</h4>
             </mat-list-item>
             <mat-list-item #listDemand
                 (click)="drawer.toggle(); productOutput = false; offerOutput = false; demandOutput = true">
                 <mat-icon id="micon" mat-list-icon>next_week</mat-icon>
-                <h4>Demandes</h4>
+                <h4>Mes demandes</h4>
             </mat-list-item>
         </mat-list>
     </mat-drawer>
@@ -36,7 +36,7 @@
             <div class="container" *ngIf="productOutput">
                 <div class=" row">
                     <div class="col" *ngFor="let d of data | paginate:{ itemsPerPage: 8, currentPage: p }">
-                        <app-card-product title="{{ d.title }}"></app-card-product>
+                        <app-card-product title="{{ d.shortLabel }}"></app-card-product>
                     </div>
                 </div>
                 <br>
@@ -45,7 +45,7 @@
             <div class="container" *ngIf="offerOutput">
                 <div class=" row">
                     <div class="col" *ngFor="let d of data | paginate:{ itemsPerPage: 8, currentPage: p }">
-                        <app-card-product title="bande d'achat : {{ d.title }}"></app-card-product>
+                        <app-card-product title="bande d'achat : {{ d.shortLabel }}"></app-card-product>
                     </div>
                 </div>
                 <br>
