@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,12 +15,23 @@ export class ProductService {
     this.apiUrl = environment.apibaseUrl;
   }
 
-  public findAllPoduct():Observable<Product[]>{
+  public findAllPoduct(): Observable<Product[]> {
     const headers = new HttpHeaders();
-    let value = this.http.get<Product[]>(`${this.apiUrl}/findProducts`, { headers });
-    console.log(`${this.apiUrl}/findProducts`)
-    console.log(headers)
-    console.log(value);
-    return value;
+    return this.http.get<Product[]>(`${this.apiUrl}/findProducts`, { headers });
   }
+
+  public addProduct(product: Product): Observable<Product[]> {
+    const headers = new HttpHeaders({
+      'content-type': 'application/json'
+    });
+    const body = JSON.stringify(product);
+    return this.http.post<Product[]>(`${this.apiUrl}/addProduct`, body, { headers });
+  }
+
+  public findProductByShortLabel(shortLabel: string): Observable<Product[]> {
+    let params = new HttpParams().set("shortLabel", shortLabel);
+    return this.http.post<Product[]>(`${this.apiUrl}/findProductByLabel`, { params });
+  }
+
+
 }

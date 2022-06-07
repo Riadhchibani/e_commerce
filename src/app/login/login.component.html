@@ -7,18 +7,18 @@
                     <mat-icon class="icon">email</mat-icon>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Username/Email</mat-label>
-                        <input type="text" matInput placeholder="" required>
+                        <input name="username" #boxUsername type="text" matInput placeholder="" required>
                     </mat-form-field>
                     <div></div>
                     <mat-icon class="icon">key</mat-icon>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Password</mat-label>
-                        <input type="password" matInput placeholder="" required>
+                        <input name="password" #boxPassword type="password" matInput placeholder="" required>
                     </mat-form-field>
                 </form>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-button>Login</button>
+                <button mat-button (click)="login(boxUsername.value, boxPassword.value)">Login</button>
             </mat-card-actions>
 
         </mat-card>
