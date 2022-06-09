@@ -11,6 +11,9 @@ import { Consumer } from './model/Consumer';
 export class ConsumerService {
 
   private apiUrl: string;
+  optionsRegister = {
+    headers: new HttpHeaders().set('Content-Type', 'application/json')
+  };
 
   constructor(private http: HttpClient, private routerService: ActivatedRoute) {
     this.apiUrl = environment.apibaseUrl;
@@ -21,9 +24,9 @@ export class ConsumerService {
   }
 
   public login(username: string, password: string): Observable<Consumer> {
-    let params = new HttpParams();
-    params.set("username", username);
-    params.set("password", password);
-    return this.http.get<Consumer>(`${this.apiUrl}/getConsumer`, { params });
+
+    let _return = this.http.post<Consumer>(`${this.apiUrl}/getConsumer`, { "username": username, "password": password }, this.optionsRegister);
+    return _return;
+
   }
 }

@@ -10,6 +10,9 @@ import { Product } from './model/Product';
 })
 export class ProductService {
   private apiUrl: string;
+  optionsRegister = {
+    headers: new HttpHeaders().set('Content-Type', 'application/json')
+  };
 
   constructor(private http: HttpClient, private routerService: ActivatedRoute) {
     this.apiUrl = environment.apibaseUrl;
@@ -17,7 +20,7 @@ export class ProductService {
 
   public findAllPoduct(): Observable<Product[]> {
     const headers = new HttpHeaders();
-    return this.http.get<Product[]>(`${this.apiUrl}/findProducts`, { headers });
+    return this.http.get<Product[]>(`${this.apiUrl}/findProducts`, this.optionsRegister);
   }
 
   public addProduct(product: Product): Observable<Product[]> {

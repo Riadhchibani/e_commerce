@@ -1,12 +1,10 @@
 import { Consumer } from "./Consumer";
 
-export class Product {
+export interface Product {
 
-    constructor(
-        public id?: number,
-        public shortLabel?: string,
-        public price?: number,
-        public reference?: string,
-        public consumer?: Consumer[]
-    ) { }
+    id: number,
+    shortLabel: string,
+    price: number,
+    reference: string,
+    consumer: Consumer[]
 }

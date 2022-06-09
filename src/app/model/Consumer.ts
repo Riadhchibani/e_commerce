@@ -1,32 +1,15 @@
 import { Product } from "./Product";
 
-export class Consumer {
+export interface Consumer {
 
-    constructor(
-        private id: number,
-        private firstName: string,
-        private lastName: number,
-        private email: string,
-        private mobileNumber: string,
-        private username: string,
-        private password: string,
-        private products: Product[],
-    ) { }
-
-    public get _username() {
-        return this.username; 
-    }
-
-    public set _username(username: string) {
-        this.username = username;
-    }
-
-    public get _password() {
-        return this.password; 
-    }
-
-    public set _password(password: string) {
-        this.password = password;
-    }
+    id: number,
+    firstName: string,
+    lastName: number,
+    email: string,
+    mobileNumber: string,
+    username: string,
+    password: string,
+    role: string;
+    products: Product[],
 
 }

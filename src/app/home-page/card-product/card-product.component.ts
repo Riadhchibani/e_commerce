@@ -1,4 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CommandService } from 'src/app/command.service';
+import { Consumer } from 'src/app/model/Consumer';
+import { Product } from 'src/app/model/Product';
+import { DialogAnimationsComponent } from './dialog-animations/dialog-animations.component';
 
 @Component({
   selector: 'app-card-product',
@@ -7,10 +12,49 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardProductComponent implements OnInit {
 
-  @Input() title: string = '';
-  constructor() { }
+  @Input() data!: Product;
+  autoTicks = false;
+  disabled = false;
+  invert = false;
+  max = 100;
+  min = 0;
+  showTicks = false;
+  step = 1;
+  thumbLabel = false;
+  value = 0;
+  vertical = false;
+  tickInterval = 1;
+  consumer!: Consumer;
+
+  getSliderTickInterval(): number | 'auto' {
+    if (this.showTicks) {
+      return this.autoTicks ? 'auto' : this.tickInterval;
+    }
+
+    return 0;
+  }
+
+  constructor(private commandService: CommandService, public dialog: MatDialog) { }
+
+  addCommand(pro: Product) {
+    this.consumer = JSON.parse(localStorage.getItem("consumer") || "");
+    console.log(this.data);
+    let pros: Product[];
+    pros = [pro];
+    console.log(pros);
+    this.commandService.addCommand(this.consumer, pros).subscribe(
+      (dataa: any) => {
+        console.log(dataa);
+      }
+    );
+  }
 
   ngOnInit(): void {
+
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(DialogAnimationsComponent);
   }
 
 }

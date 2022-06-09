@@ -23,6 +23,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { DemandComponent } from './home-page/demand/demand.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { PurchaseDemandComponent } from './home-page/purchase-demand/purchase-demand.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogAnimationsComponent } from './home-page/card-product/dialog-animations/dialog-animations.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { DemandComponent } from './home-page/demand/demand.component';
     LoginComponent,
     HomePageComponent,
     CardProductComponent,
-    DemandComponent
+    DemandComponent,
+    PurchaseDemandComponent,
+    DialogAnimationsComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +55,8 @@ import { DemandComponent } from './home-page/demand/demand.component';
     ScrollingModule,
     NgxPaginationModule,
     HttpClientModule,
+    MatSliderModule,
+    MatDialogModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
