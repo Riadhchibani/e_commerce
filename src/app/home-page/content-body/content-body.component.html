@@ -1,0 +1,38 @@
+<div class="bloc">
+    <div class="container" *ngIf="items.get('itemOfGetAllProduct')">
+        <div class=" row">
+            <div class="col" *ngFor="let d of data | paginate:{ itemsPerPage: 8, currentPage: p }">
+                <app-card-product [data]='d'></app-card-product>
+            </div>
+        </div>
+        <br>
+        <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+    </div>
+    <div class="container" *ngIf="items.get('itemOfDemands')">
+        <div class=" row">
+            <div class="col" *ngFor="let d of dataPurchase | paginate:{ itemsPerPage: 8, currentPage: p }">
+                <app-purchase-demand [data]='d'></app-purchase-demand>
+            </div>
+        </div>
+        <br>
+        <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+    </div>
+    <div class="container" *ngIf="items.get('itemOfMyDemand')">
+        <div class="row">
+            <div class="col" *ngFor="let d of data | paginate:{ itemsPerPage: 8, currentPage: p }">
+                <app-demand></app-demand>
+            </div>
+        </div>
+        <br>
+        <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+    </div>
+    <div class="container" *ngIf="items.get('itemOfAdminPurchaseDemand')">
+        <div class="row">
+            <div class="col" *ngFor="let d of dataCommand | paginate:{ itemsPerPage: 8, currentPage: p }">
+                <app-demand [data]='d'></app-demand>
+            </div>
+        </div>
+        <br>
+        <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+    </div>
+</div>

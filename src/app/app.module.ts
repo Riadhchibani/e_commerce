@@ -27,6 +27,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { PurchaseDemandComponent } from './home-page/purchase-demand/purchase-demand.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAnimationsComponent } from './home-page/card-product/dialog-animations/dialog-animations.component';
+import { ContentBodyComponent } from './home-page/content-body/content-body.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DialogAnimationsComponent } from './home-page/card-product/dialog-anima
     CardProductComponent,
     DemandComponent,
     PurchaseDemandComponent,
-    DialogAnimationsComponent
+    DialogAnimationsComponent,
+    ContentBodyComponent
   ],
   imports: [
     BrowserModule,

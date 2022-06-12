@@ -38,20 +38,16 @@ export class CardProductComponent implements OnInit {
 
   addCommand(pro: Product) {
     this.consumer = JSON.parse(localStorage.getItem("consumer") || "");
-    console.log(this.data);
     let pros: Product[];
     pros = [pro];
-    console.log(pros);
     this.commandService.addCommand(this.consumer, pros).subscribe(
       (dataa: any) => {
-        console.log(dataa);
+        //console.log(dataa);
       }
     );
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(DialogAnimationsComponent);

@@ -1,3 +1,4 @@
+<!-- NAVBAR -->
 <mat-toolbar>
     <button mat-icon-button (click)="drawer.toggle()" class="example-icon"
         aria-label="Example icon-button with menu icon">
@@ -5,76 +6,42 @@
     </button>
     <span>{{this.usernameOutput}}</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" routerLink="/login">
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+        routerLink="/login">
         <mat-icon>logout</mat-icon>
     </button>
 </mat-toolbar>
-<!---->
+<!-- NAVBAR -->
+<!-- SIDEBAR -->
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
         <mat-list>
             <mat-list-item #listProduct
-                (click)="drawer.toggle(); productOutput = true; offerOutput = false; demandOutput = false; demandOutputAdmin = false">
+                (click)="drawer.toggle(); addNewItem(itemOfGetAllProduct)">
                 <mat-icon id="micon" mat-list-icon>shopping_cart</mat-icon>
                 <h4>Liste des produits</h4>
             </mat-list-item>
             <mat-list-item #listOffer
-                (click)="drawer.toggle(); productOutput = false; offerOutput = true; demandOutput = false ; demandOutputAdmin = false">
+                (click)="drawer.toggle(); addNewItem(itemOfDemands)">
                 <mat-icon id="micon" mat-list-icon>note</mat-icon>
                 <h4>Demande d'achat</h4>
             </mat-list-item>
             <mat-list-item #listDemand
-                (click)="drawer.toggle(); productOutput = false; offerOutput = false; demandOutput = true; demandOutputAdmin = false">
+                (click)="drawer.toggle(); addNewItem(itemOfMyDemand)">
                 <mat-icon id="micon" mat-list-icon>next_week</mat-icon>
                 <h4>Mes demandes</h4>
             </mat-list-item>
             <mat-list-item #listDemand *ngIf="consumer.role == 'admin'"
-                (click)="drawer.toggle(); productOutput = false; offerOutput = false; demandOutput = false;  demandOutputAdmin =true">
+                (click)="drawer.toggle(); addNewItem(itemOfAdminPurchaseDemand)">
                 <mat-icon id="micon" mat-list-icon>next_week</mat-icon>
                 <h4>Valider les demandes</h4>
             </mat-list-item>
         </mat-list>
     </mat-drawer>
-
+    <!-- SIDEBAR -->
+    <!-- CONTENT -->
     <div class="example-sidenav-content">
-        <div class="bloc">
-            <div class="container" *ngIf="productOutput">
-                <div class=" row">
-                    <div class="col" *ngFor="let d of data | paginate:{ itemsPerPage: 8, currentPage: p }">
-                        <app-card-product [data]='d'></app-card-product>
-                    </div>
-                </div>
-                <br>
-                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
-            </div>
-            <div class="container" *ngIf="offerOutput">
-                <div class=" row">
-                    <div class="col" *ngFor="let d of dataPurchase | paginate:{ itemsPerPage: 8, currentPage: p }">
-                        <app-purchase-demand [data]='d'></app-purchase-demand>
-                    </div>
-                </div>
-                <br>
-                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
-            </div>
-            <div class="container" *ngIf="demandOutput">
-                <div class="row">
-                    <div class="col" *ngFor="let d of data | paginate:{ itemsPerPage: 8, currentPage: p }">
-                        <app-demand></app-demand>
-                    </div>
-                </div>
-                <br>
-                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
-            </div>
-            <div class="container" *ngIf="demandOutputAdmin">
-                <div class="row">
-                    <div class="col" *ngFor="let d of dataCommand | paginate:{ itemsPerPage: 8, currentPage: p }">
-                        <app-demand [data]='d'></app-demand>
-                    </div>
-                </div>
-                <br>
-                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
-            </div>
-        </div>
+        <app-content-body typeOfOutput="{{itemTemp}}"></app-content-body>
     </div>
-
+    <!-- CONTENT -->
 </mat-drawer-container>
