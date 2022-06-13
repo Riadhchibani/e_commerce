@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apibaseUrl : 'http://localhost:8081/Ecommerce/servlet'
+  apibaseUrl : 'https://purchase-apl.herokuapp.com/Ecommerce/servlet'
 };
 
 /*
