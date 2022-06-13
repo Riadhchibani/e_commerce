@@ -69,7 +69,10 @@ export class ContentBodyComponent implements OnInit {
   }
 
   ngOnChanges(event: any) {
-    console.log(event.typeOfOutput.currentValue);
+    this.getData();
+    this.getMyCommand();
+    this.getAllCommands();
+    console.log("works ! ");
     for (let item of this.items.keys()) {
       this.items.set(item, false);
       if (event.typeOfOutput.currentValue == item) {

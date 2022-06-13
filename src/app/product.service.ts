@@ -36,5 +36,11 @@ export class ProductService {
     return this.http.post<Product[]>(`${this.apiUrl}/findProductByLabel`, { params });
   }
 
-
+  public updateProduct(product: Product): Observable<Product> {
+    const headers = new HttpHeaders({
+      'content-type': 'application/json'
+    });
+    const body = JSON.stringify(product);
+    return this.http.post<Product>(`${this.apiUrl}/findProductByLabel`, body, { headers });
+  }
 }

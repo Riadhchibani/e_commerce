@@ -22,10 +22,11 @@ export class CommandService {
     this.apiUrl = environment.apibaseUrl;
   }
 
-  public addCommand(consumer: Consumer, product: Product[]) {
+  public addCommand(consumer: Consumer, product: Product[], qte: number) {
     const command = {} as Command;
     command.products = product;
     command.consumer = consumer;
+    command.qte = qte;
     const body = JSON.stringify(command);
     return this.http.post(`${this.apiUrl}/addCommand`, body, this.optionsRegister);
   }

@@ -13,6 +13,7 @@ import { DialogAnimationsComponent } from './dialog-animations/dialog-animations
 export class CardProductComponent implements OnInit {
 
   @Input() data!: Product;
+  qte: number = 0;
   autoTicks = false;
   disabled = false;
   invert = false;
@@ -34,17 +35,20 @@ export class CardProductComponent implements OnInit {
     return 0;
   }
 
-  constructor(private commandService: CommandService, public dialog: MatDialog) { }
+  constructor(private commandService: CommandService, public dialog: MatDialog) { 
+    
+  }
 
   addCommand(pro: Product) {
     this.consumer = JSON.parse(localStorage.getItem("consumer") || "");
     let pros: Product[];
     pros = [pro];
-    this.commandService.addCommand(this.consumer, pros).subscribe(
+    this.commandService.addCommand(this.consumer, pros, this.qte).subscribe(
       (dataa: any) => {
         //console.log(dataa);
       }
     );
+    this.qte = 0;
   }
 
   ngOnInit(): void { }
