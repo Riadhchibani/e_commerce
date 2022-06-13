@@ -27,6 +27,7 @@ export class CardProductComponent implements OnInit {
   tickInterval = 1;
   consumer!: Consumer;
   productInfo: any = [];
+  totalPrice: number = 0 ;
 
   getSliderTickInterval(): number | 'auto' {
     if (this.showTicks) {
@@ -57,7 +58,11 @@ export class CardProductComponent implements OnInit {
     );
   }
 
-
+  change(event:any,price:number)
+  {
+    console.log(event.target.value,price);
+    this.totalPrice = event.target.value * price ;
+  }
 
   ngOnInit(): void {
     this.getProductsData();

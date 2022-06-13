@@ -30,6 +30,11 @@ export class CommandService {
     return this.http.post(`${this.apiUrl}/addCommand`, body, this.optionsRegister);
   }
 
+  public validateCommand(command:Command) {
+    const body = JSON.stringify(command);
+    return this.http.post(`${this.apiUrl}/updateCommand`, body, this.optionsRegister);
+  }
+
   public getMyCommand(consumer: Consumer): Observable<Command[]> {
     const body = JSON.stringify(consumer);
     return this.http.post<Command[]>(`${this.apiUrl}/getCommand`, body, this.optionsRegister);

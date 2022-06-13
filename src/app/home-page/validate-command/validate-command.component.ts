@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Command} from "../../model/Command";
 import {Consumer} from "../../model/Consumer";
 import {CommandService} from "../../command.service";
+import {Product} from "../../model/Product";
 
 @Component({
   selector: 'app-validate-command',
@@ -19,9 +20,15 @@ export class ValidateCommandComponent implements OnInit {
 
   }
 
+  async validateCommand(command: Command) {
+    command.status = 'Valider' ;
+    await this.commandService.validateCommand(command).toPromise();
+    this.getMyCommand();
+  }
+
   getMyCommand() {
     let consumer = JSON.parse(localStorage.getItem("consumer") || "");
-    this.commandService.getMyCommand(consumer).subscribe(
+    this.commandService.getAllCommands().subscribe(
       data => {
         console.log(data);
         this.dataPurchase = data.filter((command:any) => {

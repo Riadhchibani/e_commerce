@@ -4,19 +4,20 @@
       <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ data.reference }}
+            <h4 style="color: red">[{{ data.reference }}]</h4>&nbsp;
+            <h5>{{ data.consumer.lastName }} {{ data.consumer.firstName }}</h5>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="bloc" style="width: 18rem;">
           <img class="card-img-top" style="width: 80%;" src="../../../assets/img/command.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{data.products[0].shortLabel}}</h5>
-            <p class="card-text">status : some information ...</p>
+            <p class="card-text">{{data.dateCreation | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
           </div>
         </div>
         <mat-action-row *ngIf="consumer.role == 'admin'">
           <button mat-button color="warn" (click)="prevStep()">Annuler</button>
-          <button mat-button color="primary" (click)="nextStep()">Accepter</button>
+          <button mat-button color="primary" (click)="validateCommand(data)">Accepter</button>
         </mat-action-row>
       </mat-expansion-panel>
     </div>

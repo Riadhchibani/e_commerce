@@ -8,6 +8,7 @@
           <div class="card-body">
             <h5 class="card-title">{{data.reference}}</h5>
             <p class="card-text">{{data.products[0].shortLabel}}</p>
+            <p class="card-text">{{data.dateCreation | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
             <div style="display: flex; justify-content:center; align-items:center;">
               <button mat-stroked-button color="warn" type="button" (click)=deleteCommand(data)>Annuler</button>
             </div>

@@ -21,7 +21,7 @@
                 <h4>Liste des produits</h4>
             </mat-list-item>
             <mat-list-item (click)="btnClick('listCommand')">
-                <mat-icon id="micon" mat-list-icon>note</mat-icon>
+                <mat-icon id="micon" mat-list-icon>reorder</mat-icon>
                 <h4>Demande d'achat</h4>
             </mat-list-item>
             <mat-list-item (click)="btnClick('listMyDemand')">
@@ -29,7 +29,7 @@
                 <h4>Mes demandes</h4>
             </mat-list-item>
             <mat-list-item *ngIf="consumer.role == 'admin'" (click)="btnClick('validateCommand')">
-                <mat-icon id="micon" mat-list-icon>next_week</mat-icon>
+                <mat-icon id="micon" mat-list-icon>swap_horizontal_circle</mat-icon>
                 <h4>Valider les demandes</h4>
             </mat-list-item>
         </mat-list>

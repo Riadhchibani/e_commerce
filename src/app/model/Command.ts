@@ -5,7 +5,7 @@ export interface Command {
 
     id: number,
     reference: string,
-    status: number,
+    status: string,
     consumer: Consumer,
     products: Product[],
 
