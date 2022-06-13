@@ -28,6 +28,8 @@ import { PurchaseDemandComponent } from './home-page/purchase-demand/purchase-de
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAnimationsComponent } from './home-page/card-product/dialog-animations/dialog-animations.component';
 import { ContentBodyComponent } from './home-page/content-body/content-body.component';
+import { ListCommandComponent } from './list-command/list-command.component';
+import { ValidateCommandComponent } from './home-page/validate-command/validate-command.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ContentBodyComponent } from './home-page/content-body/content-body.comp
     DemandComponent,
     PurchaseDemandComponent,
     DialogAnimationsComponent,
-    ContentBodyComponent
+    ContentBodyComponent,
+    ListCommandComponent,
+    ValidateCommandComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,14 @@ import { ContentBodyComponent } from './home-page/content-body/content-body.comp
     RouterModule.forRoot([
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-      { path: 'home/:username', component: HomePageComponent }
+      { path: 'home/:username', component: HomePageComponent , children : [
+          { path: 'listProduct', component: CardProductComponent },
+          { path: 'listCommand', component: PurchaseDemandComponent },
+          { path: 'listMyDemand', component: DemandComponent },
+          { path: 'validateCommand', component: ValidateCommandComponent },
+          { path: 'listOrder', component: ListCommandComponent }
+
+        ] }
     ])
   ],
   providers: [],

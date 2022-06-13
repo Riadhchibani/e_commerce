@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col" *ngFor="let data of dataPurchase ">
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ data.reference }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="bloc" style="width: 18rem;">
+          <img class="card-img-top" style="width: 80%;" src="../../../assets/img/command.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{data.products[0].shortLabel}}</h5>
+            <p class="card-text">status : some information ...</p>
+          </div>
+        </div>
+        <mat-action-row *ngIf="consumer.role == 'admin'">
+          <button mat-button color="warn" (click)="prevStep()">Annuler</button>
+          <button mat-button color="primary" (click)="nextStep()">Accepter</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>

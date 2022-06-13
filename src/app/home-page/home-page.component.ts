@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommandService } from '../command.service';
 import { Command } from '../model/Command';
@@ -31,9 +31,13 @@ export class HomePageComponent implements OnInit {
 
 
 
-  constructor(private routerService: ActivatedRoute) { }
+  constructor(private routerService: ActivatedRoute,private router : Router) { }
 
-  
+
+  btnClick (path:string) {
+     this.router.navigateByUrl('home/'+this.usernameOutput+'/'+path);
+  }
+
   ngOnInit(): void {
     this.consumer = JSON.parse(localStorage.getItem("consumer") || "");
     this.usernameOutput = this.routerService.snapshot.params['username'];

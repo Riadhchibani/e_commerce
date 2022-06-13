@@ -38,4 +38,11 @@ export class CommandService {
   public getAllCommands(): Observable<Command[]> {
     return this.http.get<Command[]>(`${this.apiUrl}/getAllCommands`, this.optionsRegister);
   }
+
+  public deleteCommand(command:Command){
+    console.log(command);
+    const body = JSON.stringify(command);
+    return this.http.post(`${this.apiUrl}/deleteCommand`,body, this.optionsRegister)
+  }
+
 }

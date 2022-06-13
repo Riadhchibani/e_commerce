@@ -1,20 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Command } from 'src/app/model/Command';
-import { Consumer } from 'src/app/model/Consumer';
+import {Component, Input, OnInit} from '@angular/core';
+import {Command} from "../../model/Command";
+import {Consumer} from "../../model/Consumer";
 import {CommandService} from "../../command.service";
 
 @Component({
-  selector: 'app-demand',
-  templateUrl: './demand.component.html',
-  styleUrls: ['./demand.component.css']
+  selector: 'app-validate-command',
+  templateUrl: './validate-command.component.html',
+  styleUrls: ['./validate-command.component.css']
 })
-export class DemandComponent implements OnInit {
+export class ValidateCommandComponent implements OnInit {
 
   @Input() data!: Command;
   consumer !: Consumer;
   step = 0;
   dataPurchase: any = [];
-
 
   constructor(private commandService: CommandService) {
 
@@ -26,7 +25,7 @@ export class DemandComponent implements OnInit {
       data => {
         console.log(data);
         this.dataPurchase = data.filter((command:any) => {
-          return command.status === 'Valider' ;
+          return command.status === 'En attente' ;
         });
       }
     );

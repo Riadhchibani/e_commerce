@@ -16,23 +16,19 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
         <mat-list>
-            <mat-list-item #listProduct
-                (click)="drawer.toggle(); addNewItem(itemOfGetAllProduct)">
+            <mat-list-item (click)="btnClick('listProduct')">
                 <mat-icon id="micon" mat-list-icon>shopping_cart</mat-icon>
                 <h4>Liste des produits</h4>
             </mat-list-item>
-            <mat-list-item #listOffer
-                (click)="drawer.toggle(); addNewItem(itemOfDemands)">
+            <mat-list-item (click)="btnClick('listCommand')">
                 <mat-icon id="micon" mat-list-icon>note</mat-icon>
                 <h4>Demande d'achat</h4>
             </mat-list-item>
-            <mat-list-item #listDemand
-                (click)="drawer.toggle(); addNewItem(itemOfMyDemand)">
+            <mat-list-item (click)="btnClick('listMyDemand')">
                 <mat-icon id="micon" mat-list-icon>next_week</mat-icon>
                 <h4>Mes demandes</h4>
             </mat-list-item>
-            <mat-list-item #listDemand *ngIf="consumer.role == 'admin'"
-                (click)="drawer.toggle(); addNewItem(itemOfAdminPurchaseDemand)">
+            <mat-list-item *ngIf="consumer.role == 'admin'" (click)="btnClick('validateCommand')">
                 <mat-icon id="micon" mat-list-icon>next_week</mat-icon>
                 <h4>Valider les demandes</h4>
             </mat-list-item>
@@ -40,8 +36,10 @@
     </mat-drawer>
     <!-- SIDEBAR -->
     <!-- CONTENT -->
-    <div class="example-sidenav-content">
-        <app-content-body typeOfOutput="{{itemTemp}}"></app-content-body>
+  <div class="example-sidenav-content">
+    <div class="bloc">
+            <router-outlet></router-outlet>
     </div>
+  </div>
     <!-- CONTENT -->
 </mat-drawer-container>

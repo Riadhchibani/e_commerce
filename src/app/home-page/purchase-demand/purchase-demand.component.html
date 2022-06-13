@@ -1,12 +1,19 @@
-<div class="card-style">
-    <div class="card" style="width: 25rem;">
-        <img class="card-img-top" src="../../../assets/img/bonCommand.png" alt="Card image cap" style="width: 80% !important; ">
-        <div class="card-body">
+<div class="container">
+  <div class="row">
+    <div class="col" *ngFor="let data of dataPurchase ">
+      <div class="card-style">
+        <div class="card" style="width: 25rem;">
+          <img class="card-img-top" src="../../../assets/img/bonCommand.png" alt="Card image cap"
+               style="width: 80% !important; ">
+          <div class="card-body">
             <h5 class="card-title">{{data.reference}}</h5>
-            <p class="card-text">some information ...</p>
+            <p class="card-text">{{data.products[0].shortLabel}}</p>
             <div style="display: flex; justify-content:center; align-items:center;">
-                <button mat-stroked-button color="warn">Annuler</button>
+              <button mat-stroked-button color="warn" type="button" (click)=deleteCommand(data)>Annuler</button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import { CommandService } from 'src/app/command.service';
 import { Consumer } from 'src/app/model/Consumer';
 import { Product } from 'src/app/model/Product';
 import { DialogAnimationsComponent } from './dialog-animations/dialog-animations.component';
+import {ProductService} from "../../product.service";
 
 @Component({
   selector: 'app-card-product',
@@ -25,6 +26,7 @@ export class CardProductComponent implements OnInit {
   vertical = false;
   tickInterval = 1;
   consumer!: Consumer;
+  productInfo: any = [];
 
   getSliderTickInterval(): number | 'auto' {
     if (this.showTicks) {
@@ -34,7 +36,7 @@ export class CardProductComponent implements OnInit {
     return 0;
   }
 
-  constructor(private commandService: CommandService, public dialog: MatDialog) { }
+  constructor(private commandService: CommandService, public dialog: MatDialog, private productService: ProductService) { }
 
   addCommand(pro: Product) {
     this.consumer = JSON.parse(localStorage.getItem("consumer") || "");
@@ -47,7 +49,19 @@ export class CardProductComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void { }
+  getProductsData() {
+    this.productService.findAllPoduct().subscribe(
+      (data) => {
+        this.productInfo = data;
+      }
+    );
+  }
+
+
+
+  ngOnInit(): void {
+    this.getProductsData();
+  }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(DialogAnimationsComponent);
