@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  apibaseUrl : 'https://purchase-apl.herokuapp.com/Ecommerce/servlet'
+
 };
