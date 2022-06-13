@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Command} from "../../model/Command";
-import {Consumer} from "../../model/Consumer";
-import {CommandService} from "../../command.service";
-import {Product} from "../../model/Product";
+import { Component, Input, OnInit } from '@angular/core';
+import { Command } from "../../model/Command";
+import { Consumer } from "../../model/Consumer";
+import { CommandService } from "../../command.service";
+import { Product } from "../../model/Product";
 
 @Component({
   selector: 'app-validate-command',
@@ -12,6 +12,7 @@ import {Product} from "../../model/Product";
 export class ValidateCommandComponent implements OnInit {
 
   @Input() data!: Command;
+  p: any;
   consumer !: Consumer;
   step = 0;
   dataPurchase: any = [];
@@ -21,7 +22,7 @@ export class ValidateCommandComponent implements OnInit {
   }
 
   async validateCommand(command: Command) {
-    command.status = 'Valider' ;
+    command.status = 'Valider';
     await this.commandService.validateCommand(command).toPromise();
     this.getMyCommand();
   }
@@ -31,8 +32,8 @@ export class ValidateCommandComponent implements OnInit {
     this.commandService.getAllCommands().subscribe(
       data => {
         console.log(data);
-        this.dataPurchase = data.filter((command:any) => {
-          return command.status === 'En attente' ;
+        this.dataPurchase = data.filter((command: any) => {
+          return command.status === 'En attente';
         });
       }
     );

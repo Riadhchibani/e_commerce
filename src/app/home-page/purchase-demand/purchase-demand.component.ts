@@ -12,6 +12,7 @@ import {Command} from "../../model/Command";
 export class PurchaseDemandComponent implements OnInit {
 
   @Input() data!: any;
+  p: any;
   autoTicks = false;
   disabled = false;
   invert = false;

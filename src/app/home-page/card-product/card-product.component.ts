@@ -4,7 +4,7 @@ import { CommandService } from 'src/app/command.service';
 import { Consumer } from 'src/app/model/Consumer';
 import { Product } from 'src/app/model/Product';
 import { DialogAnimationsComponent } from './dialog-animations/dialog-animations.component';
-import {ProductService} from "../../product.service";
+import { ProductService } from "../../product.service";
 
 @Component({
   selector: 'app-card-product',
@@ -14,6 +14,7 @@ import {ProductService} from "../../product.service";
 export class CardProductComponent implements OnInit {
 
   @Input() data!: Product;
+  qte: number = 0;
   autoTicks = false;
   disabled = false;
   invert = false;
@@ -27,7 +28,7 @@ export class CardProductComponent implements OnInit {
   tickInterval = 1;
   consumer!: Consumer;
   productInfo: any = [];
-  totalPrice: number = 0 ;
+  totalPrice: number = 0;
 
   getSliderTickInterval(): number | 'auto' {
     if (this.showTicks) {
@@ -43,13 +44,13 @@ export class CardProductComponent implements OnInit {
     this.consumer = JSON.parse(localStorage.getItem("consumer") || "");
     let pros: Product[];
     pros = [pro];
-    this.commandService.addCommand(this.consumer, pros).subscribe(
+    this.commandService.addCommand(this.consumer, pros, this.qte).subscribe(
       (dataa: any) => {
         //console.log(dataa);
       }
     );
   }
-
+  p: any;
   getProductsData() {
     this.productService.findAllPoduct().subscribe(
       (data) => {
@@ -58,10 +59,9 @@ export class CardProductComponent implements OnInit {
     );
   }
 
-  change(event:any,price:number)
-  {
-    console.log(event.target.value,price);
-    this.totalPrice = event.target.value * price ;
+  change(event: any, price: number) {
+    console.log(event.target.value, price);
+    this.totalPrice = event.target.value * price;
   }
 
   ngOnInit(): void {

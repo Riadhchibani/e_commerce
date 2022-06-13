@@ -22,15 +22,16 @@ export class CommandService {
     this.apiUrl = environment.apibaseUrl;
   }
 
-  public addCommand(consumer: Consumer, product: Product[]) {
+  public addCommand(consumer: Consumer, product: Product[], qte: number) {
     const command = {} as Command;
     command.products = product;
     command.consumer = consumer;
+    command.qte = qte;
     const body = JSON.stringify(command);
     return this.http.post(`${this.apiUrl}/addCommand`, body, this.optionsRegister);
   }
 
-  public validateCommand(command:Command) {
+  public validateCommand(command: Command) {
     const body = JSON.stringify(command);
     return this.http.post(`${this.apiUrl}/updateCommand`, body, this.optionsRegister);
   }
@@ -44,10 +45,10 @@ export class CommandService {
     return this.http.get<Command[]>(`${this.apiUrl}/getAllCommands`, this.optionsRegister);
   }
 
-  public deleteCommand(command:Command){
+  public deleteCommand(command: Command) {
     console.log(command);
     const body = JSON.stringify(command);
-    return this.http.post(`${this.apiUrl}/deleteCommand`,body, this.optionsRegister)
+    return this.http.post(`${this.apiUrl}/deleteCommand`, body, this.optionsRegister)
   }
 
 }

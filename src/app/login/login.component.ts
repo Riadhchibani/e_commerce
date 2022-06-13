@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
       data => {
         this.consumer = data;
         localStorage.setItem("consumer", JSON.stringify(data));
-        this.router.navigate([`home/${this.consumer.firstName}`])
+        this.router.navigate([`home/${this.consumer.firstName}/listProduct`])
       }
     );
   }

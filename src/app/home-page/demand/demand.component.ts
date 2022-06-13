@@ -20,6 +20,8 @@ export class DemandComponent implements OnInit {
 
   }
 
+  p: any;
+  
   getMyCommand() {
     let consumer = JSON.parse(localStorage.getItem("consumer") || "");
     this.commandService.getMyCommand(consumer).subscribe(

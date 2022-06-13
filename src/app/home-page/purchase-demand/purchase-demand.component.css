@@ -1,3 +1,26 @@
 .card-style {
     padding: 10px;
 }
+
+.card-img-top {
+    width: 70% !important;
+    position: relative;
+    left: 17%;
+}
+
+.card-title {
+    left: 36%;
+    position: relative;
+    width: 50%;
+}
+
+.card-text {
+    left: 42%;
+    position: relative;
+    width: 50%;
+}
+
+.card-sub-text {
+    position: relative;
+    left: 19%;
+}

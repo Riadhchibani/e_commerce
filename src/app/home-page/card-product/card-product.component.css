@@ -1,3 +1,8 @@
 .card-style {
     padding: 10px;
 }
+
+#btn-style {
+    position: relative;
+    left: 34%;
+}

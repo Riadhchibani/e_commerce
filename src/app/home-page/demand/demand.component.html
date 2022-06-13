@@ -1,10 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col" *ngFor="let data of dataPurchase ">
+    <div class="col" *ngFor="let data of dataPurchase | paginate:{ itemsPerPage: 8, currentPage: p }">
       <div class="card-style">
         <div class="card" style="width: 25rem;">
-          <img class="card-img-top" src="../../../assets/img/bonCommand.png" alt="Card image cap"
-               style="width: 80% !important; ">
+          <img class="card-img-top" src="../../../assets/img/bonCommand.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{data.reference}}</h5>
             <p class="card-text">{{data.products[0].shortLabel}}</p>
@@ -14,3 +13,5 @@
     </div>
   </div>
 </div>
+<br>
+<pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>

@@ -8,5 +8,5 @@ export interface Command {
     status: string,
     consumer: Consumer,
     products: Product[],
-
+    qte: number
 }
