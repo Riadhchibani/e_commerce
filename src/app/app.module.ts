@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -31,6 +33,7 @@ import { DialogAnimationsComponent } from './home-page/card-product/dialog-anima
 import { ContentBodyComponent } from './home-page/content-body/content-body.component';
 import { ListCommandComponent } from './list-command/list-command.component';
 import { ValidateCommandComponent } from './home-page/validate-command/validate-command.component';
+import { AddProductComponent } from './home-page/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { ValidateCommandComponent } from './home-page/validate-command/validate-
     DialogAnimationsComponent,
     ContentBodyComponent,
     ListCommandComponent,
-    ValidateCommandComponent
+    ValidateCommandComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
@@ -65,17 +69,21 @@ import { ValidateCommandComponent } from './home-page/validate-command/validate-
     MatSliderModule,
     MatDialogModule,
     FormsModule,
+    MatSelectModule,
+    MatMenuModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-      { path: 'home/:username', component: HomePageComponent , children : [
+      {
+        path: 'home/:username', component: HomePageComponent, children: [
           { path: 'listProduct', component: CardProductComponent },
           { path: 'listCommand', component: PurchaseDemandComponent },
           { path: 'listMyDemand', component: DemandComponent },
           { path: 'validateCommand', component: ValidateCommandComponent },
-          { path: 'listOrder', component: ListCommandComponent }
-
-        ] }
+          { path: 'listOrder', component: ListCommandComponent },
+          { path: 'addProduct', component: AddProductComponent }
+        ]
+      }
     ])
   ],
   providers: [],

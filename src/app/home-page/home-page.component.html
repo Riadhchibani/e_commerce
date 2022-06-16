@@ -6,6 +6,15 @@
     </button>
     <span>{{this.usernameOutput}}</span>
     <span class="example-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="btnClick('addProduct')">
+            <mat-icon>add_circle_outline</mat-icon>
+            Ajouter produit
+        </button>
+    </mat-menu>
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
         routerLink="/login">
         <mat-icon>logout</mat-icon>
@@ -36,10 +45,10 @@
     </mat-drawer>
     <!-- SIDEBAR -->
     <!-- CONTENT -->
-  <div class="example-sidenav-content">
-    <div class="bloc">
+    <div class="example-sidenav-content">
+        <div class="bloc">
             <router-outlet></router-outlet>
+        </div>
     </div>
-  </div>
     <!-- CONTENT -->
 </mat-drawer-container>
