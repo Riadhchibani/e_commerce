@@ -7,6 +7,9 @@
           <div class="card-body">
             <h5 class="card-title">{{data.reference}}</h5>
             <p class="card-text">{{data.products[0].shortLabel}}</p>
+            <p class="card-sub-text">Date validation</p>
+            <p class="card-sub-date">{{data.dateValidation | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
+            <p class="card-text-total">PRIX TOTAL : {{data.qte * data.products[0].price}} DT</p>
           </div>
         </div>
       </div>

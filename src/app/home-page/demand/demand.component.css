@@ -34,6 +34,21 @@
     width: 50%;
 }
 
+.card-text-total {
+  left: 28%;
+  position: relative;
+}
+
+.card-sub-text {
+  left: 28%;
+  position: relative;
+}
+
+.card-sub-date {
+  left: 19%;
+  position: relative;
+}
+
 .card-style {
     padding: 10px;
 }

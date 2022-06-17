@@ -13,6 +13,7 @@
           <div class="card-body">
             <h5 class="card-title">{{data.products[0].shortLabel}}</h5>
             <p class="card-text">{{data.dateCreation | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
+            <p class="card-sub-text">PRIX TOTAL : {{data.qte * data.products[0].price}} DT</p>
           </div>
         </div>
         <mat-action-row *ngIf="consumer.role == 'admin'">

@@ -20,6 +20,11 @@
     width: 50%;
 }
 
+.card-text-total {
+  left: 28%;
+  position: relative;
+}
+
 .card-sub-text {
     position: relative;
     left: 19%;

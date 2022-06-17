@@ -1,3 +1,8 @@
 #style-expansion{
     padding: 10px;
 }
+
+.card-text-total {
+  left: 28%;
+  position: relative;
+}
