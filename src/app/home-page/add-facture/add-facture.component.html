@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-4 offset-5">
+            <mat-label>Favorite food</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{food.viewValue}}
+                </mat-option>
+            </mat-select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 offset-5">
+            <mat-form-field class="example-margin example-width w-75" appearance="fill">
+                <mat-label>Prix</mat-label>
+                <input matInput #boxPrice type="number">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 offset-5">
+            <mat-form-field appearance="fill" class="w-75">
+                <mat-label>Description</mat-label>
+                <textarea matInput #boxDescription></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-4 offset-5"><button mat-button color="primary">Valider</button>
+            <button mat-button color="primary">Annuler</button>
+        </div>
+    </div>
+</div>

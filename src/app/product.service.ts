@@ -23,13 +23,13 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.apiUrl}/findProducts`, this.optionsRegister);
   }
 
-  // public addProduct(product: Product): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'content-type': 'application/json'
-  //   });
-  //   const body = JSON.stringify(product);
-  //   return this.http.post<any>(`${this.apiUrl}/addProduct`, body, { headers });
-  // }
+  public addProduct(product: Product): Observable<any> {
+    const headers = new HttpHeaders({
+      'content-type': 'application/json'
+    });
+    const body = JSON.stringify(product);
+    return this.http.post<any>(`${this.apiUrl}/addProduct`, body, { headers });
+  }
 
   public findProductByShortLabel(shortLabel: string): Observable<Product[]> {
     let params = new HttpParams().set("shortLabel", shortLabel);

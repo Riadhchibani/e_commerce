@@ -14,10 +14,10 @@ export class AddProductComponent implements OnInit {
 
   addProduct(productLabel: string, price: any, description: string) {
     const product = {} as Product;
-   // product.price = price;
+    product.price = price;
     product.shortLabel = productLabel;
     product.description = description;
-    //this.productService.addProduct(product);
+    this.productService.addProduct(product).subscribe();
   }
 
   ngOnInit(): void {

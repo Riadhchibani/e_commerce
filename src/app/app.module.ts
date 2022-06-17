@@ -34,6 +34,7 @@ import { ContentBodyComponent } from './home-page/content-body/content-body.comp
 import { ListCommandComponent } from './list-command/list-command.component';
 import { ValidateCommandComponent } from './home-page/validate-command/validate-command.component';
 import { AddProductComponent } from './home-page/add-product/add-product.component';
+import { AddFactureComponent } from './home-page/add-facture/add-facture.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AddProductComponent } from './home-page/add-product/add-product.compone
     ContentBodyComponent,
     ListCommandComponent,
     ValidateCommandComponent,
-    AddProductComponent
+    AddProductComponent,
+    AddFactureComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +83,8 @@ import { AddProductComponent } from './home-page/add-product/add-product.compone
           { path: 'listMyDemand', component: DemandComponent },
           { path: 'validateCommand', component: ValidateCommandComponent },
           { path: 'listOrder', component: ListCommandComponent },
-          { path: 'addProduct', component: AddProductComponent }
+          { path: 'addProduct', component: AddProductComponent },
+          { path: 'addFacture', component: AddFactureComponent }
         ]
       }
     ])
