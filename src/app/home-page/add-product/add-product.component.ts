@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/model/Product';
 import { ProductService } from 'src/app/product.service';
 
@@ -16,7 +16,7 @@ export class AddProductComponent implements OnInit {
     const product = {} as Product;
    // product.price = price;
     product.shortLabel = productLabel;
-    product.description = description; 
+    product.description = description;
     //this.productService.addProduct(product);
   }
 
