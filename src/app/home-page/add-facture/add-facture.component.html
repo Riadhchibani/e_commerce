@@ -1,12 +1,14 @@
 <div class="container">
     <div class="row">
         <div class="col-4 offset-5">
-            <mat-label>Favorite food</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                    {{food.viewValue}}
-                </mat-option>
-            </mat-select>
+            <mat-form-field appearance="fill">
+                <mat-label>Choose an option</mat-label>
+                <mat-select #boxType [disabled]="disableSelect.value">
+                    <mat-option value="option1">FACTURE1</mat-option>
+                    <mat-option value="option2">FACTURE2</mat-option>
+                    <mat-option value="option3">FACTURE3</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </div>
     <div class="row">
@@ -28,7 +30,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-4 offset-5"><button mat-button color="primary">Valider</button>
+        <div class="col-4 offset-5"><button mat-button color="primary" (click)="addFacture(boxType.value, boxPrice.value, boxDescription.value)">Valider</button>
             <button mat-button color="primary">Annuler</button>
         </div>
     </div>

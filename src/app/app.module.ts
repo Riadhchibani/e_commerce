@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSortModule } from '@angular/material/sort';
 
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -35,6 +38,7 @@ import { ListCommandComponent } from './list-command/list-command.component';
 import { ValidateCommandComponent } from './home-page/validate-command/validate-command.component';
 import { AddProductComponent } from './home-page/add-product/add-product.component';
 import { AddFactureComponent } from './home-page/add-facture/add-facture.component';
+import { EditHolidayComponent } from './home-page/edit-holiday/edit-holiday.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,8 @@ import { AddFactureComponent } from './home-page/add-facture/add-facture.compone
     ListCommandComponent,
     ValidateCommandComponent,
     AddProductComponent,
-    AddFactureComponent
+    AddFactureComponent,
+    EditHolidayComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +78,9 @@ import { AddFactureComponent } from './home-page/add-facture/add-facture.compone
     FormsModule,
     MatSelectModule,
     MatMenuModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatSortModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
@@ -84,7 +92,8 @@ import { AddFactureComponent } from './home-page/add-facture/add-facture.compone
           { path: 'validateCommand', component: ValidateCommandComponent },
           { path: 'listOrder', component: ListCommandComponent },
           { path: 'addProduct', component: AddProductComponent },
-          { path: 'addFacture', component: AddFactureComponent }
+          { path: 'addFacture', component: AddFactureComponent },
+          { path: 'editHoliday', component: EditHolidayComponent }
         ]
       }
     ])

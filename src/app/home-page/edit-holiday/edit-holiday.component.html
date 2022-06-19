@@ -1,0 +1,66 @@
+<mat-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup" (click)="findHoliday()">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Declaration</ng-template>
+            <mat-form-field appearance="fill">
+                <mat-label>nombre de jour</mat-label>
+                <input matInput #boxDay type="number" formControlName="secondCtrl" placeholder="nomber de jour"
+                    required>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-25">
+                <mat-label>Description</mat-label>
+                <textarea matInput #boxDescription></textarea>
+            </mat-form-field>
+            <div>
+                <button mat-button (click)="addHoliday(boxDay.value, boxDescription.value)">Valider</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>tous les demandes</ng-template>
+            <!--Content find All holiday-->
+            <table matSort>
+                <tr>
+                    <th mat-sort-header="name">Nom</th>
+                    <th mat-sort-header="status">status</th>
+                    <th mat-sort-header="description">description</th>
+                </tr>
+
+                <tr *ngFor="let data of holidayData">
+                    <td *ngIf="data.status != 'Confirmée'">{{data.consumerDemand.username}}</td>
+                    <td *ngIf="data.status != 'Confirmée'">
+                        {{data.status}}
+                        <mat-form-field appearance="fill">
+                            <mat-label>sélectionner status</mat-label>
+                            <mat-select [(value)]="data.status">
+                                <mat-option (click)="updateStatus(data, data.status)" *ngFor="let s of status"
+                                    [value]="s.value">
+                                    {{s.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td *ngIf="data.status != 'Confirmée'">{{data.description}}</td>
+                </tr>
+            </table>
+            <!--Content find All holiday-->
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <table matSort>
+            <tr>
+                <th mat-sort-header="name">Nom</th>
+                <th mat-sort-header="status">status</th>
+                <th mat-sort-header="description">description</th>
+            </tr>
+
+            <tr *ngFor="let data of holidayData">
+                <td *ngIf="data.status == 'Confirmée'">{{data.consumerDemand.username}}</td>
+                <td *ngIf="data.status == 'Confirmée'">{{data.status}}</td>
+                <td *ngIf="data.status == 'Confirmée'">{{data.description}}</td>
+            </tr>
+        </table>
+    </mat-step>
+</mat-stepper>
