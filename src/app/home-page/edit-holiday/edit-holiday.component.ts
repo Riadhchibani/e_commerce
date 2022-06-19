@@ -62,10 +62,8 @@ export class EditHolidayComponent implements OnInit {
   }
 
   updateStatus(holiday: Holiday, status: string) {
-    console.log(holiday);
-    console.log(status);
-    console.log(holiday.status);
     holiday.status = status;
+    holiday.consumerAdmin = holiday.consumerDemand = JSON.parse(localStorage.getItem("consumer") || "");
     this.holidayService.updateHoliday(holiday).subscribe();
   }
 
