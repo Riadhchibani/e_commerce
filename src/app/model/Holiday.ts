@@ -3,7 +3,8 @@ import { Consumer } from "./Consumer";
 export interface Holiday {
 
     idHoliday: number,
-    numberDay: number,
+    beginDate?: Date,
+    endDate?: Date,
     description: string,
     status: string,
     consumerAdmin: Consumer,

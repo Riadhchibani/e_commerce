@@ -49,6 +49,10 @@
                 <mat-icon id="micon" mat-list-icon>swap_horizontal_circle</mat-icon>
                 <h4>Valider les demandes</h4>
             </mat-list-item>
+            <mat-list-item *ngIf="consumer.role == 'admin'" (click)="btnClick('validateOutlay')">
+                <mat-icon id="micon" mat-list-icon>description</mat-icon>
+                <h4>Valider les factures</h4>
+            </mat-list-item>
         </mat-list>
     </mat-drawer>
     <!-- SIDEBAR -->

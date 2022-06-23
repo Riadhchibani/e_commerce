@@ -24,4 +24,8 @@ export class FactureService {
     const body = JSON.stringify(outlay);
     return this.http.post(`${this.apiUrl}/addOutlay`, body, this.optionsRegister);
   }
+
+  public findOutlay(){
+    return this.http.get<Outlay[]>(`${this.apiUrl}/findOutlay`);
+  }
 }

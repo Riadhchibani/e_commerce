@@ -13,6 +13,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -39,6 +42,8 @@ import { ValidateCommandComponent } from './home-page/validate-command/validate-
 import { AddProductComponent } from './home-page/add-product/add-product.component';
 import { AddFactureComponent } from './home-page/add-facture/add-facture.component';
 import { EditHolidayComponent } from './home-page/edit-holiday/edit-holiday.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ValidateOutlayComponent } from './validate-outlay/validate-outlay.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +59,8 @@ import { EditHolidayComponent } from './home-page/edit-holiday/edit-holiday.comp
     ValidateCommandComponent,
     AddProductComponent,
     AddFactureComponent,
-    EditHolidayComponent
+    EditHolidayComponent,
+    ValidateOutlayComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +87,10 @@ import { EditHolidayComponent } from './home-page/edit-holiday/edit-holiday.comp
     ReactiveFormsModule,
     MatStepperModule,
     MatSortModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
@@ -93,7 +103,8 @@ import { EditHolidayComponent } from './home-page/edit-holiday/edit-holiday.comp
           { path: 'listOrder', component: ListCommandComponent },
           { path: 'addProduct', component: AddProductComponent },
           { path: 'addFacture', component: AddFactureComponent },
-          { path: 'editHoliday', component: EditHolidayComponent }
+          { path: 'editHoliday', component: EditHolidayComponent },
+          { path: 'validateOutlay', component: ValidateOutlayComponent }
         ]
       }
     ])

@@ -1,6 +1,11 @@
-table{
+table {
     width: 100%;
 }
-mat-form-field{
+
+mat-form-field {
     padding: 10px;
+}
+
+.demo-inline-calendar-card {
+    width: 200px;
 }

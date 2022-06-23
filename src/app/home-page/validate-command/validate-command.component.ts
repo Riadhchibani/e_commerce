@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Command } from "../../model/Command";
 import { Consumer } from "../../model/Consumer";
 import { CommandService } from "../../command.service";
 import { Product } from "../../model/Product";
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-validate-command',
@@ -16,6 +17,8 @@ export class ValidateCommandComponent implements OnInit {
   consumer !: Consumer;
   step = 0;
   dataPurchase: any = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  displayedColumns: string[] = ['reference', 'nom', 'prenom', 'produit' , 'dateCreation' , 'action'];
 
   constructor(private commandService: CommandService) {
 

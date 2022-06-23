@@ -26,7 +26,6 @@ export class DemandComponent implements OnInit {
     let consumer = JSON.parse(localStorage.getItem("consumer") || "");
     this.commandService.getMyCommand(consumer).subscribe(
       data => {
-        console.log(data);
         this.dataPurchase = data.filter((command:any) => {
           return command.status === 'Valider' ;
         });

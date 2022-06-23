@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Holiday } from 'src/app/model/Holiday';
 import { EditHolidayService } from 'src/app/edit-holiday.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Status {
   value: string;
@@ -36,38 +37,68 @@ export class EditHolidayComponent implements OnInit {
   ];
 
   holidayData: Holiday[] = [];
+  holidayDataConfirmed: Holiday[] = [];
   selected = 'option2';
+  selectedBeginDate = new Date();
+  selectedEndDate = new Date();
+  displayedColumnsUpdate: string[] = ['nom', 'status', 'description', 'annuler'];
+  displayedColumns: string[] = ['nom', 'status', 'description'];
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
 
-  constructor(private holidayService: EditHolidayService, private _formBuilder: FormBuilder) { }
+  constructor(private _snackBar: MatSnackBar, private holidayService: EditHolidayService, private _formBuilder: FormBuilder) { }
 
   findHoliday() {
     this.holidayService.findAllHoliday().subscribe(
       data => {
-        this.holidayData = data;
+        this.holidayData = data.filter((holiday: any) => {
+          return holiday.status != 'Confirmée';
+        });
+        this.holidayDataConfirmed = data.filter((holiday: any) => {
+          return holiday.status === 'Confirmée';
+        });
       }
     )
   }
 
-  addHoliday(days: string, description: string) {
+  addHoliday(description: string) {
     const holiday = {} as Holiday;
-    holiday.numberDay = +days;
     holiday.description = description;
     holiday.consumerDemand = JSON.parse(localStorage.getItem("consumer") || "");
-    this.holidayService.addHoliday(holiday).subscribe();
-    this.findHoliday();
+    if (this.selectedBeginDate >= this.selectedEndDate) {
+      this._snackBar.open("Date de début ou de fin de congés undefined", '', {
+        duration: 1000
+      });
+    } else {
+      holiday.beginDate = this.selectedBeginDate;
+      holiday.endDate = this.selectedEndDate;
+      this.holidayService.addHoliday(holiday).subscribe();
+      this.findHoliday();
+    }
   }
 
   ngOnInit(): void {
     this.findHoliday();
   }
 
-  updateStatus(holiday: Holiday, status: string) {
+  async updateStatus(holiday: Holiday, status: string) {
     holiday.status = status;
     holiday.consumerAdmin = holiday.consumerDemand = JSON.parse(localStorage.getItem("consumer") || "");
-    this.holidayService.updateHoliday(holiday).subscribe();
+    await this.holidayService.updateHoliday(holiday).toPromise();
+    this.holidayData = [];
+    this.findHoliday();
+  }
+
+  async updateStatusByNotConfirmed(holiday: Holiday) {
+    holiday.status = "En cours";
+    holiday.consumerAdmin = holiday.consumerDemand = JSON.parse(localStorage.getItem("consumer") || "");
+    await this.holidayService.updateHoliday(holiday).toPromise();
+    this.holidayDataConfirmed = [];
+    this.findHoliday();
   }
 
   ngOnChanges(event: any) {
+    this.findHoliday();
   }
 
 }
