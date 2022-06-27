@@ -4,6 +4,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Holiday } from 'src/app/model/Holiday';
 import { EditHolidayService } from 'src/app/edit-holiday.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {Consumer} from "../../model/Consumer";
 
 interface Status {
   value: string;
@@ -45,6 +46,7 @@ export class EditHolidayComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'status', 'description'];
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
+  consumer !: Consumer;
 
   constructor(private _snackBar: MatSnackBar, private holidayService: EditHolidayService, private _formBuilder: FormBuilder) { }
 
@@ -52,7 +54,10 @@ export class EditHolidayComponent implements OnInit {
     this.holidayService.findAllHoliday().subscribe(
       data => {
         this.holidayData = data.filter((holiday: any) => {
-          return holiday.status != 'Confirmée';
+          if(this.consumer.role == 'admin')
+            return holiday.status != 'Confirmée';
+          else
+            return holiday.consumerDemand.id == this.consumer.id;
         });
         this.holidayDataConfirmed = data.filter((holiday: any) => {
           return holiday.status === 'Confirmée';
@@ -61,7 +66,7 @@ export class EditHolidayComponent implements OnInit {
     )
   }
 
-  addHoliday(description: string) {
+  async addHoliday(description: string) {
     const holiday = {} as Holiday;
     holiday.description = description;
     holiday.consumerDemand = JSON.parse(localStorage.getItem("consumer") || "");
@@ -72,13 +77,16 @@ export class EditHolidayComponent implements OnInit {
     } else {
       holiday.beginDate = this.selectedBeginDate;
       holiday.endDate = this.selectedEndDate;
-      this.holidayService.addHoliday(holiday).subscribe();
+      await this.holidayService.addHoliday(holiday).toPromise();
+      this.holidayData = [] ;
+      this.holidayDataConfirmed = [] ;
       this.findHoliday();
     }
   }
 
   ngOnInit(): void {
     this.findHoliday();
+    this.consumer = JSON.parse(localStorage.getItem("consumer") || "");
   }
 
   async updateStatus(holiday: Holiday, status: string) {

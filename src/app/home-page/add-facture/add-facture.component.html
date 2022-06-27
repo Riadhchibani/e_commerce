@@ -4,9 +4,9 @@
             <mat-form-field appearance="fill">
                 <mat-label>Choose an option</mat-label>
                 <mat-select #boxType [disabled]="disableSelect.value">
-                    <mat-option value="option1">FACTURE1</mat-option>
-                    <mat-option value="option2">FACTURE2</mat-option>
-                    <mat-option value="option3">FACTURE3</mat-option>
+                    <mat-option value="FACTURE1">FACTURE1</mat-option>
+                    <mat-option value="FACTURE2">FACTURE2</mat-option>
+                    <mat-option value="FACTURE3">FACTURE3</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-4 offset-5">
             <button mat-button color="primary"
-                (click)="addFacture(boxType.value, boxPrice.value, boxDescription.value)">Valider</button>
+                (click)="addFacture(boxType.value, boxPrice.value, boxDescription.value);openDialog('0ms', '0ms')">Valider</button>
             <button mat-button color="primary">Annuler</button>
         </div>
     </div>

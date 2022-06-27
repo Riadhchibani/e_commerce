@@ -19,7 +19,7 @@
                 </div>
             </div>
             <mat-form-field appearance="fill" class="w-75">
-                <mat-label>Description</mat-label>
+                <mat-label>Raison</mat-label>
                 <textarea matInput #boxDescription></textarea>
             </mat-form-field>
             <div>
@@ -29,8 +29,9 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>tous les demandes</ng-template>
-            <!--Content find All holiday-->
+            <ng-template matStepLabel *ngIf="consumer.role == 'admin'">Toutes les demandes</ng-template>
+            <ng-template matStepLabel *ngIf="consumer.role != 'admin'">Mes demandes de congés</ng-template>
+          <!--Content find All holiday-->
             <table mat-table [dataSource]="holidayData" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="nom">
@@ -42,7 +43,7 @@
                     <th mat-header-cell *matHeaderCellDef> Status </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.status}}
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="fill" *ngIf="consumer.role == 'admin'">
                             <mat-label>sélectionner status</mat-label>
                             <mat-select [(value)]="element.status">
                                 <mat-option (click)="updateStatus(element, element.status)" *ngFor="let s of status"
@@ -65,7 +66,7 @@
             <!--Content find All holiday-->
         </form>
     </mat-step>
-    <mat-step>
+    <mat-step *ngIf="consumer.role == 'admin'">
         <ng-template matStepLabel>Done</ng-template>
         <table mat-table [dataSource]="holidayDataConfirmed" class="mat-elevation-z8">
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FactureService } from 'src/app/facture.service';
 import { Outlay } from 'src/app/model/Outlay';
+import {DialogAnimationsComponent} from "../card-product/dialog-animations/dialog-animations.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-facture',
@@ -10,7 +12,7 @@ import { Outlay } from 'src/app/model/Outlay';
 })
 export class AddFactureComponent implements OnInit {
 
-  constructor(private factureService:FactureService) { }
+  constructor(private factureService:FactureService,public dialog: MatDialog) { }
 
   disableSelect = new FormControl(false);
 
@@ -23,6 +25,10 @@ export class AddFactureComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(DialogAnimationsComponent);
   }
 
 }
