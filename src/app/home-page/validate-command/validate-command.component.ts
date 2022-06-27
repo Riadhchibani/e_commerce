@@ -4,6 +4,9 @@ import { Consumer } from "../../model/Consumer";
 import { CommandService } from "../../command.service";
 import { Product } from "../../model/Product";
 import { MatPaginator } from '@angular/material/paginator';
+import { CommentServiceService } from 'src/app/comment-service.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCommentComponent } from './add-comment/add-comment.component';
 
 @Component({
   selector: 'app-validate-command',
@@ -18,9 +21,9 @@ export class ValidateCommandComponent implements OnInit {
   step = 0;
   dataPurchase: any = [];
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  displayedColumns: string[] = ['reference', 'nom', 'prenom', 'produit' , 'dateCreation' , 'action'];
+  displayedColumns: string[] = ['reference', 'nom', 'prenom', 'produit', 'dateCreation', 'action'];
 
-  constructor(private commandService: CommandService) {
+  constructor(public dialog: MatDialog, private commandService: CommandService, private commentServiceService: CommentServiceService) {
 
   }
 
@@ -28,6 +31,10 @@ export class ValidateCommandComponent implements OnInit {
     command.status = 'Valider';
     await this.commandService.validateCommand(command).toPromise();
     this.getMyCommand();
+  }
+
+  openDialog(): void {
+    this.dialog.open(AddCommentComponent);
   }
 
   getMyCommand() {
@@ -41,6 +48,10 @@ export class ValidateCommandComponent implements OnInit {
       }
     );
     return this.dataPurchase;
+  }
+
+  annulerValidateCommand() {
+    //await this.commentServiceService.addComment
   }
 
   setStep(index: number) {

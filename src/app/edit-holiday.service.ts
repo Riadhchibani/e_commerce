@@ -23,6 +23,7 @@ export class EditHolidayService {
     let consumer = JSON.parse(localStorage.getItem("consumer") || "");
     holiday.consumerDemand = consumer;
     const body = JSON.stringify(holiday);
+    console.log(body);
     return this.http.post(`${this.apiUrl}/saveHoliday`, body, this.optionsRegister);
   }
 

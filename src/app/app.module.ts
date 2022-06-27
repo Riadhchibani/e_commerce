@@ -44,6 +44,7 @@ import { AddFactureComponent } from './home-page/add-facture/add-facture.compone
 import { EditHolidayComponent } from './home-page/edit-holiday/edit-holiday.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ValidateOutlayComponent } from './validate-outlay/validate-outlay.component';
+import { AddCommentComponent } from './home-page/validate-command/add-comment/add-comment.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ValidateOutlayComponent } from './validate-outlay/validate-outlay.compo
     AddProductComponent,
     AddFactureComponent,
     EditHolidayComponent,
-    ValidateOutlayComponent
+    ValidateOutlayComponent,
+    AddCommentComponent
   ],
   imports: [
     BrowserModule,
