@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { CommentServiceService } from 'src/app/comment-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCommentComponent } from './add-comment/add-comment.component';
+import { Comment } from 'src/app/model/Comment';
 
 @Component({
   selector: 'app-validate-command',
@@ -33,15 +34,10 @@ export class ValidateCommandComponent implements OnInit {
     this.getMyCommand();
   }
 
-  openDialog(): void {
-    this.dialog.open(AddCommentComponent);
-  }
-
   getMyCommand() {
     let consumer = JSON.parse(localStorage.getItem("consumer") || "");
     this.commandService.getAllCommands().subscribe(
       data => {
-        console.log(data);
         this.dataPurchase = data.filter((command: any) => {
           return command.status === 'En attente';
         });
@@ -50,8 +46,20 @@ export class ValidateCommandComponent implements OnInit {
     return this.dataPurchase;
   }
 
-  annulerValidateCommand() {
-    //await this.commentServiceService.addComment
+  openDialog(command: Command) {
+    let resultDialog = this.dialog.open(AddCommentComponent);
+    resultDialog.afterClosed().subscribe(
+      result => {
+        let comment = {} as Comment;
+        comment.description = result;
+        comment.command = command;
+        this.annulerValidateCommand(comment);
+      }
+    )
+  }
+
+  annulerValidateCommand(comment: Comment) {
+    this.commentServiceService.addComment(comment).subscribe();
   }
 
   setStep(index: number) {

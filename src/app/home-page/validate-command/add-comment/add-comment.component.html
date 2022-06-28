@@ -1,5 +1,5 @@
 <mat-form-field appearance="fill" class="w-75">
     <mat-label>Raison</mat-label>
-    <textarea matInput #boxDescription></textarea>
+    <textarea matInput [(ngModel)]="commentVal"></textarea>
 </mat-form-field>
-<button mat-button color="primary" >Valider</button>
+<button mat-raised-button color="primary" [mat-dialog-close]="commentVal" cdkFocusInitial>valider</button>

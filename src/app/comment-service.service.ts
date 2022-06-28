@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Comment } from './model/Comment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class CommentServiceService {
   public addComment(comment: Comment) {
     let consumer = JSON.parse(localStorage.getItem("consumer") || "");
     const body = JSON.stringify(comment);
+    console.log(body);
     return this.http.post(`${this.apiUrl}/saveComment`, body, this.optionsRegister);
   }
 }

@@ -88,8 +88,8 @@
             <ng-container matColumnDef="annuler">
                 <th mat-header-cell *matHeaderCellDef> annuler </th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon"
-                        (click)='updateStatusByNotConfirmed(element)'>
+                    <button mat-mini-fab color="warn"
+                        (click)='openDialog(element)'>
                         <mat-icon>remove_circle</mat-icon>
                     </button>
                 </td>

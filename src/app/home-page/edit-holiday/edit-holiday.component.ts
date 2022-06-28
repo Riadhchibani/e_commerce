@@ -4,7 +4,11 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Holiday } from 'src/app/model/Holiday';
 import { EditHolidayService } from 'src/app/edit-holiday.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {Consumer} from "../../model/Consumer";
+import { Consumer } from "../../model/Consumer";
+import { AddCommentComponent } from '../validate-command/add-comment/add-comment.component';
+import { Comment } from 'src/app/model/Comment';
+import { CommentServiceService } from 'src/app/comment-service.service';
+import { MatDialog } from '@angular/material/dialog';
 
 interface Status {
   value: string;
@@ -48,13 +52,13 @@ export class EditHolidayComponent implements OnInit {
   serializedDate = new FormControl((new Date()).toISOString());
   consumer !: Consumer;
 
-  constructor(private _snackBar: MatSnackBar, private holidayService: EditHolidayService, private _formBuilder: FormBuilder) { }
+  constructor(private _snackBar: MatSnackBar, private holidayService: EditHolidayService, private _formBuilder: FormBuilder, private commentServiceService: CommentServiceService, public dialog: MatDialog) { }
 
   findHoliday() {
     this.holidayService.findAllHoliday().subscribe(
       data => {
         this.holidayData = data.filter((holiday: any) => {
-          if(this.consumer.role == 'admin')
+          if (this.consumer.role == 'admin')
             return holiday.status != 'Confirmée';
           else
             return holiday.consumerDemand.id == this.consumer.id;
@@ -78,8 +82,8 @@ export class EditHolidayComponent implements OnInit {
       holiday.beginDate = this.selectedBeginDate;
       holiday.endDate = this.selectedEndDate;
       await this.holidayService.addHoliday(holiday).toPromise();
-      this.holidayData = [] ;
-      this.holidayDataConfirmed = [] ;
+      this.holidayData = [];
+      this.holidayDataConfirmed = [];
       this.findHoliday();
     }
   }
@@ -95,6 +99,23 @@ export class EditHolidayComponent implements OnInit {
     await this.holidayService.updateHoliday(holiday).toPromise();
     this.holidayData = [];
     this.findHoliday();
+  }
+
+  openDialog(holiday: Holiday) {
+    let resultDialog = this.dialog.open(AddCommentComponent);
+    resultDialog.afterClosed().subscribe(
+      (result: string) => {
+        let comment = {} as Comment;
+        comment.description = result;
+        comment.holiday = holiday;
+        this.annulerHoliday(comment);
+        this.updateStatusByNotConfirmed(holiday);
+      }
+    )
+  }
+
+  annulerHoliday(comment: Comment) {
+    this.commentServiceService.addComment(comment).toPromise();
   }
 
   async updateStatusByNotConfirmed(holiday: Holiday) {
