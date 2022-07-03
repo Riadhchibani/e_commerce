@@ -36,6 +36,7 @@ export class EditHolidayService {
       'content-type': 'application/json'
     });
     const body = JSON.stringify(holiday);
+    console.log("hol", body);
     return this.http.put<Holiday>(`${this.apiUrl}/updateHolidayStatus`, body, { headers });
   }
 }

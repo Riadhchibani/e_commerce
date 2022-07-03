@@ -42,12 +42,13 @@ export class EditHolidayComponent implements OnInit {
   ];
 
   holidayData: Holiday[] = [];
+  commentItem: string = "";
   holidayDataConfirmed: Holiday[] = [];
   selected = 'option2';
   selectedBeginDate = new Date();
   selectedEndDate = new Date();
-  displayedColumnsUpdate: string[] = ['nom', 'status', 'description', 'annuler'];
-  displayedColumns: string[] = ['nom', 'status', 'description'];
+  displayedColumnsUpdate: string[] = ['nom', 'status', 'description', 'action'];
+  displayedColumns: string[] = ['nom', 'status', 'description', 'commentaire'];
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
   consumer !: Consumer;
@@ -107,9 +108,10 @@ export class EditHolidayComponent implements OnInit {
       (result: string) => {
         let comment = {} as Comment;
         comment.description = result;
+        holiday.status = "Refusée";
         comment.holiday = holiday;
         this.annulerHoliday(comment);
-        this.updateStatusByNotConfirmed(holiday);
+        this.updateStatusByNotConfirmed(holiday, comment);
       }
     )
   }
@@ -118,16 +120,24 @@ export class EditHolidayComponent implements OnInit {
     this.commentServiceService.addComment(comment).toPromise();
   }
 
-  async updateStatusByNotConfirmed(holiday: Holiday) {
-    holiday.status = "En cours";
+  async updateStatusByNotConfirmed(holiday: Holiday, comment: Comment) {
+    //holiday.comment = comment;
     holiday.consumerAdmin = holiday.consumerDemand = JSON.parse(localStorage.getItem("consumer") || "");
+    console.log("hol", holiday);
     await this.holidayService.updateHoliday(holiday).toPromise();
     this.holidayDataConfirmed = [];
     this.findHoliday();
   }
 
-  ngOnChanges(event: any) {
-    this.findHoliday();
+  getCommentHoliday(element: Holiday) {
+    this.commentServiceService.getHolidayComment(element).subscribe(
+      data => {
+        console.log("data==>",data)
+        this._snackBar.open(data, 'annuler', {
+
+        });
+      }
+    )
   }
 
 }

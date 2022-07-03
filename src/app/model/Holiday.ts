@@ -1,3 +1,4 @@
+import { Comment } from "./Comment";
 import { Consumer } from "./Consumer";
 
 export interface Holiday {

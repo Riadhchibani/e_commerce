@@ -19,7 +19,6 @@ export class ProductService {
   }
 
   public findAllPoduct(): Observable<Product[]> {
-    const headers = new HttpHeaders();
     return this.http.get<Product[]>(`${this.apiUrl}/findProducts`, this.optionsRegister);
   }
 

@@ -1,3 +1,4 @@
+import { Comment } from "./Comment";
 import { Consumer } from "./Consumer";
 import { Product } from "./Product";
 
@@ -8,5 +9,6 @@ export interface Command {
     status: string,
     consumer: Consumer,
     products: Product[],
-    qte: number
+    qte: number,
+    comment:Comment
 }
