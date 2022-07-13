@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/model/Product';
 import { ProductService } from 'src/app/product.service';
@@ -10,14 +11,20 @@ import { ProductService } from 'src/app/product.service';
 })
 export class AddProductComponent implements OnInit {
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private _snackBar: MatSnackBar, private productService: ProductService, private router: Router) { }
 
   addProduct(productLabel: string, price: any, description: string) {
     const product = {} as Product;
     product.price = price;
     product.shortLabel = productLabel;
     product.description = description;
-    this.productService.addProduct(product).subscribe();
+    this.productService.addProduct(product).subscribe(
+      data => {
+        this._snackBar.open("produit ajouté", '', {
+          duration: 1000
+        });
+      }
+    );
   }
 
   ngOnInit(): void {

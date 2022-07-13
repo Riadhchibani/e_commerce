@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Holiday } from 'src/app/model/Holiday';
@@ -8,7 +8,7 @@ import { Consumer } from "../../model/Consumer";
 import { AddCommentComponent } from '../validate-command/add-comment/add-comment.component';
 import { Comment } from 'src/app/model/Comment';
 import { CommentServiceService } from 'src/app/comment-service.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 interface Status {
   value: string;
@@ -26,6 +26,8 @@ interface Status {
     },
   ],
 })
+
+
 export class EditHolidayComponent implements OnInit {
 
   firstFormGroup = this._formBuilder.group({
@@ -132,12 +134,36 @@ export class EditHolidayComponent implements OnInit {
   getCommentHoliday(element: Holiday) {
     this.commentServiceService.getHolidayComment(element).subscribe(
       data => {
-        console.log("data==>",data)
-        this._snackBar.open(data, 'annuler', {
-
+        this.dialog.open(PopupMessage, {
+          width: '500px',
+          data: { message: data }
         });
+        // this._snackBar.open(data, 'annuler', {
+
+        // });
       }
     )
   }
 
+  openDialogComment(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(PopupMessage);
+  }
+}
+@Component({
+  template: '<h4>{{data.message}}</h4>'
+})
+export class PopupMessage implements OnInit {
+
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Dialog) {
+
+  }
+  ngOnInit(): void {
+    console.log(this.data.message);
+    throw new Error('Method not implemented.');
+  }
+}
+
+interface Dialog {
+  message: string;
 }

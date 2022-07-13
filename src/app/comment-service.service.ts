@@ -35,6 +35,6 @@ export class CommentServiceService {
 
   public getCommandComment(command: Command):Observable<string>{
     const body = JSON.stringify(command);
-    return this.http.post<string>(`${this.apiUrl}/saveComment`, body, this.optionsRegister);
+    return this.http.post<string>(`${this.apiUrl}/getCommandComment`, body, this.optionsRegister);
   }
 }

@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { Command } from "../../model/Command";
 import { Consumer } from "../../model/Consumer";
 import { CommandService } from "../../command.service";
 import { Product } from "../../model/Product";
 import { MatPaginator } from '@angular/material/paginator';
 import { CommentServiceService } from 'src/app/comment-service.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { Comment } from 'src/app/model/Comment';
 
@@ -47,15 +47,22 @@ export class ValidateCommandComponent implements OnInit {
   }
 
   openDialog(command: Command) {
-    let resultDialog = this.dialog.open(AddCommentComponent);
-    resultDialog.afterClosed().subscribe(
-      result => {
-        let comment = {} as Comment;
-        comment.description = result;
-        comment.command = command;
-        this.annulerValidateCommand(comment);
+    this.commentServiceService.getCommandComment(command).subscribe(
+      data => {
+        let messageVal = data == "" ? null : data ;
+        if (messageVal === null) {
+          this.dialog.open(AddCommentComponent, {
+            data: { commandVal: command }
+          });
+        } else {
+          this.dialog.open(PopupMessage, {
+            width: '500px',
+            data: { message: messageVal }
+          });
+        }
       }
     )
+
   }
 
   annulerValidateCommand(comment: Comment) {
@@ -79,4 +86,23 @@ export class ValidateCommandComponent implements OnInit {
     this.getMyCommand();
   }
 
+}
+
+@Component({
+  template: '<h4>{{data.message}}</h4>'
+})
+export class PopupMessage implements OnInit {
+
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Dialog) {
+
+  }
+  ngOnInit(): void {
+    console.log(this.data.message);
+    throw new Error('Method not implemented.');
+  }
+}
+
+interface Dialog {
+  message: string;
 }
