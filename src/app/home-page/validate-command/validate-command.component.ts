@@ -46,6 +46,16 @@ export class ValidateCommandComponent implements OnInit {
     return this.dataPurchase;
   }
 
+  async cancelCommand(command: Command) {
+    command.status = 'Annuler' ;
+    const commentDialog = await this.dialog.open(AddCommentComponent,{data: command});
+    //resultDialog.componentInstance.name = 'Sunil';
+    commentDialog.afterClosed().subscribe(res => {
+      this.dataPurchase = [] ;
+      this.getMyCommand();
+    })
+  }
+
   openDialog(command: Command) {
     this.commentServiceService.getCommandComment(command).subscribe(
       data => {

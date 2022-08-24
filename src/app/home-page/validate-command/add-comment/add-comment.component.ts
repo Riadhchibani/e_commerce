@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { CommandService } from 'src/app/command.service';
 import { CommentServiceService } from 'src/app/comment-service.service';
 import { Command } from 'src/app/model/Command';
 import { Comment } from 'src/app/model/Comment';
@@ -13,25 +15,27 @@ import { Comment } from 'src/app/model/Comment';
 export class AddCommentComponent implements OnInit {
 
   commentVal: string = '';
-
-  constructor(private _snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: Dialog, private commentServiceService: CommentServiceService) { }
+  public name: string = "";
+  constructor(private _snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: any, private commandService: CommandService,private commentServiceService: CommentServiceService, private routerService: ActivatedRoute) { }
 
   annulerValidateCommand(comment: Comment) {
     this.commentServiceService.addComment(comment).subscribe();
   }
 
-  saveCommentHoliday() {
+  async saveCommentHoliday() {
     let comment = {} as Comment;
     comment.description = this.commentVal;
-    comment.command = this.data.commandVal;
-    this.annulerValidateCommand(comment);
+    comment.command = this.data;
+    console.log(comment);
+    //this.annulerValidateCommand(comment);
+    await this.commandService.validateCommand(this.data).toPromise();
     this._snackBar.open("commande valideé", '', {
       duration: 1000
     });
   }
 
   ngOnInit(): void {
-    console.log("Command => ", this.data.commandVal);
+    console.log("Command => ", this.data);
   }
 
 }

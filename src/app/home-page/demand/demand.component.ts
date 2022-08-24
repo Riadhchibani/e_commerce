@@ -14,7 +14,11 @@ export class DemandComponent implements OnInit {
   consumer !: Consumer;
   step = 0;
   dataPurchase: any = [];
+  dataPurchaseSaved: any = [];
+  display = "none";
 
+  selectedStatus !:string ;
+  displayedColumns: string[] = ['reference', 'nom', 'prenom', 'produit', 'dateCreation' , 'status', 'raison'];
 
   constructor(private commandService: CommandService) {
 
@@ -22,16 +26,33 @@ export class DemandComponent implements OnInit {
 
   p: any;
   
+  openModal() {
+    this.display = "block";
+  }
+  onCloseHandled() {
+    this.display = "none";
+  }
+
   getMyCommand() {
     let consumer = JSON.parse(localStorage.getItem("consumer") || "");
     this.commandService.getMyCommand(consumer).subscribe(
       data => {
-        this.dataPurchase = data.filter((command:any) => {
-          return command.status === 'Valider' ;
-        });
+        this.dataPurchase = data ;
+        this.dataPurchaseSaved = data;
+       // this.dataPurchase = data.filter((command:any) => {
+        //  return command.status === 'Valider' ;
+        //});
       }
     );
     return this.dataPurchase;
+  }
+
+  async changeStatus() {
+    this.dataPurchase = this.dataPurchaseSaved ;
+    if(this.selectedStatus)
+    this.dataPurchase = this.dataPurchase.filter((e:any) => {
+      return e.status === this.selectedStatus;
+    });
   }
 
   setStep(index: number) {

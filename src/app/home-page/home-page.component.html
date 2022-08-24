@@ -6,10 +6,11 @@
     </button>
     <span>{{this.usernameOutput}}</span>
     <span class="example-spacer"></span>
+    <div *ngIf="consumer.role == 'admin'">
     <button mat-button [matMenuTriggerFor]="menu">
         <mat-icon>settings</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu #menu="matMenu" >
         <button mat-menu-item (click)="btnClick('addProduct')">
             <mat-icon>add_circle_outline</mat-icon>
             Ajouter produit
@@ -23,6 +24,7 @@
             Gérer les congés
         </button>
     </mat-menu>
+    </div>
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
         routerLink="/login">
         <mat-icon>logout</mat-icon>

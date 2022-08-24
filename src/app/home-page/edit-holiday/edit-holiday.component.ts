@@ -54,6 +54,7 @@ export class EditHolidayComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
   consumer !: Consumer;
+  display = "none";
 
   constructor(private _snackBar: MatSnackBar, private holidayService: EditHolidayService, private _formBuilder: FormBuilder, private commentServiceService: CommentServiceService, public dialog: MatDialog) { }
 
@@ -143,6 +144,13 @@ export class EditHolidayComponent implements OnInit {
         // });
       }
     )
+  }
+
+  openModal() {
+    this.display = "block";
+  }
+  onCloseHandled() {
+    this.display = "none";
   }
 
   openDialogComment(enterAnimationDuration: string, exitAnimationDuration: string): void {
